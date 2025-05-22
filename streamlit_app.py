@@ -1,6 +1,8 @@
 # Import python packages
 import streamlit as st
 from snowflake.snowpark.functions import col
+import requests
+
 st.title("My Parets New Healthy Diner")
 
 
@@ -44,7 +46,9 @@ if ingredients_list:
 
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order )
             values ('""" + ingredients_string + """','""" + name_on_order + """')"""
-    
+    smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+    st.text(smoothiefroot_response)
+
     # st.write(my_insert_stmt)
     # st.write(len(ingredients_list))
     if len(ingredients_list)<=5:
